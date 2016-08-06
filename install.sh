@@ -3,8 +3,11 @@
 # Configure bash
 ln -s ~/dotfiles/bash/bashrc ~/.bashrc
 
+# Configure zsh
+ln -s ~/dotfiles/zsh/zshrc ~/.zshrc
+
 # Configure fish
-ln -s ~/dotfiles/fish ~/config/fish
+ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
 
 # Configure git
 ln -s ~/dotfiles/git/gitconfig ~/.gitconfig

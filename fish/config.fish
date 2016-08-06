@@ -1,60 +1,26 @@
-#!/bin/bash
+# Path to Oh My Fish install.
+set -gx OMF_PATH "/home/rll/.local/share/omf"
 
-#
-# Make bash more friendly
-#
-shopt -s cdspell  # Correct directory names typo in cd commands
-shopt -s nocaseglob  # Correct case errors in commands
+# Customize Oh My Fish configuration path.
+#set -gx OMF_CONFIG "/home/rll/.config/omf"
 
-#
-# Export dotfiles bin directory
-#
-export PATH="${PATH}:~/dotfiles/bin"
+# Load oh-my-fish configuration.
+source $OMF_PATH/init.fish
 
-#
+# Ensure Steam use system libraries
+export STEAM_RUNTIME=0
+
+# Use vim as the default editor
+export EDITOR="vim"
+
+# Add dotfiles bin directory to PATH
+set -U PATH ~/dotfiles/bin $PATH
+
 # Python Developpement
-#
-export PYTHONPATH="{$PYTHONPATH}:~/dev/python"
+export PYTHONPATH="{$PYTHONPATH}:/home/rll/dev/omtk:/home/rll/dev/python"
 
-#
 # Arch-Linux specific
-#
 alias install="pacaur -Sy"
 alias uninstall="sudo pacman -R"
 alias update="sudo pacman -Syu"
 
-#
-# Extract script
-#
-# src: https://gist.github.com/Jaxmetalmax/f0ec6d2f86474d8d319b
-extract () {
-if [ -f $1 ] ; then
-case $1 in
-*.tar.bz2) tar xjf $1 ;;
-*.tar.gz) tar xzf $1 ;;
-*.bz2) bunzip2 $1 ;;
-*.rar) rar x $1 ;;
-*.gz) gunzip $1 ;;
-*.tar) tar xf $1 ;;
-*.tbz2) tar xjf $1 ;;
-*.tgz) tar xzf $1 ;;
-*.zip) unzip $1 ;;
-*.Z) uncompress $1 ;;
-*) echo "'$1' cannot be extracted via extract()" ;;
-esac
-else
-echo "'$1' is not a valid file"
-fi
-}
-
-#
-# Powerline Integration
-#
-source /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
-
-#
-# Tmux configuration
-#
-
-# Load tmux by default
-#[[ $TERM != "screen" ]] && exec tmux

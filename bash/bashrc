@@ -12,6 +12,11 @@ shopt -s nocaseglob  # Correct case errors in commands
 export STEAM_RUNTIME=0
 
 #
+# Export dotfiles bin directory
+#
+export PATH="${PATH}:~/dotfiles/bin"
+
+#
 # Python Developpement
 #
 export PYTHONPATH="{$PYTHONPATH}:/home/rll/dev/omtk:/home/rll/dev/python"
@@ -50,7 +55,7 @@ fi
 #
 # Powerline Integration
 #
-source  /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+#source  /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
 
 #
 # Tmux configuration
