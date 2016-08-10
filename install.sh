@@ -20,3 +20,7 @@ ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/vim ~/.vim
 ln -s ~/dotfiles/vimrc ~/.vimrc
 
+# Update git submodules
+cd ~/dotfiles
+git submodule update --init
+
