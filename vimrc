@@ -131,13 +131,36 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" A tree explorer for vim
+" https://github.com/scrooloose/nerdtree
 Plugin 'scrooloose/nerdtree'
+
+" A git wrapper so awesome, it should be illegal
+" https://github.com/tpope/vim-fugitive
 Plugin 'tpope/vim-fugitive'
+
+" Syntax checking hacks for vim
+" https://github.com/scrooloose/syntastic
 Plugin 'scrooloose/syntastic'
+
+" Quoting/parenthesizing made simple
+" https://github.com/tpope/vim-surround
 Plugin 'tpope/vim-surround'
+
+" Fuzzy file, buffer, mru, tag, etc finder
+" https://github.com/ctrlpvim/ctrlp.vim
 Plugin 'ctrlpvim/ctrlp.vim'
+
+" Lean & mean status/tabline for vim that's light as air
+" https://github.com/vim-airline/vim-airline
 Plugin 'bling/vim-airline'
+
+" A code-completion engine for Vim
+" https://github.com/Valloric/YouCompleteMe
 Plugin 'Valloric/YouCompleteMe'
+
+" Molokai color scheme for Vim
+" https://github.com/tomasr/molokai
 Plugin 'tomasr/molokai'
 
 " All of your Plugins must be added before the following line
