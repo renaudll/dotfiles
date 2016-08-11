@@ -24,3 +24,12 @@ ln -s ~/dotfiles/vimrc ~/.vimrc
 cd ~/dotfiles
 git submodule update --init
 
+cd ~/dotfiles/zsh/zsh-autosuggestions
+git submodule update --init
+
+cd ~/dotfiles/vim/bundle/YouCompleteMe
+git submodule update --init --recursive
+
+# Compile ycmd for usage with python (once)
+cd ~/dotfiles/vim/bundle/YouCompleteMe
+./install.py
