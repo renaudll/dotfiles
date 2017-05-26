@@ -20,6 +20,9 @@ ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/vim ~/.vim
 ln -s ~/dotfiles/vimrc ~/.vimrc
 
+# Configure .config/autostart
+ln -s ~/dotfiles/config_autostart ~/.config/autostart
+
 # Update git submodules
 cd ~/dotfiles
 git submodule update --init

@@ -107,14 +107,25 @@ export PATH="${PATH}:~/dotfiles/bin"
 #
 # Python Developpement
 #
-export PYTHONPATH="{$PYTHONPATH}:/home/rll/dev/omtk:/home/rll/dev/python"
+export PYTHONPATH="$PYTHONPATH:/home/rll/dev/python/omtk"
+export PYTHONPATH="$PYTHONPATH:/home/rll/dev/python/libSerialization"
+export PYTHONPATH="$PYTHONPATH:/home/rll/dev/python"
 
 #
 # Arch-Linux specific
 #
-alias install="pacaur -Sy"
-alias uninstall="sudo pacman -R"
-alias update="sudo pacman -Syu"
+alias _install="pacaur -Sy"
+alias _uninstall="sudo pacman -R"
+alias _update="sudo pacman -Syu"
+alias _search="sudo pacaur -Ss"
+alias _start="sudo systemctl start"
+alias _stop="sudo systemctl stop"
+alias _status="sudo systemctl status"
+alias _restart="sudo systemctl restart"
+alias _reload="sudo systemctl daemon-reload"
+alias _enable="sudo systemctl enable"
+alias _disable="sudo systemctl disable"
+alias _journal="sudo journalctl -u "
 
 #
 # Extract script
@@ -147,7 +158,7 @@ if [ -f "/etc/arch-release" ]; then
   # MAYA SPECIFIC
   export MAYA_DISABLE_CIP=1 # Prevent a crash when loading Maya in Arch
   export MAYA_DISABLE_CER=1
-  export MAYA_COLOR_MANAGEMENT_POLICY_FILE='/home/rll/maya/mayaColorManagerProfile.xml'
+  #export MAYA_COLOR_MANAGEMENT_POLICY_FILE='/home/rll/maya/mayaColorManagerProfile.xml'
 
   # REZ
   export PATH="${PATH}:/home/rll/opt/rez/bin/rez"
@@ -156,10 +167,11 @@ if [ -f "/etc/arch-release" ]; then
   # SSTK SPECIFIC
   export SSTK_DISABLE_RAVEN=True
   export SSTK_DISABLE_LOGSTASH=True
+  export SQUEEZE_SSTK_NO_SENTRY=True
 
   # OMTK SPECIFIC
   export PYTHONPATH="${PYTHONPATH}:/home/rll/packages/libSerialization/9.9.9/"
-  export PYTHONPATH="${PYTHONPATH}:/home/rll/packages/omtk/9.9.9/"
+  export PYTHONPATH="${PYTHONPATH}:/home/rll/packages/omtk/9.9.9/python"
   export PYTHONPATH="${PYTHONPATH}:/home/rll/packages/sstk/9.9.9/python"
   export OMTK_PLUGINS="/home/rll/packages/omtk_squeeze/9.9.9:/home/rll/packages/omtk_cradle/9.9.9"
   
