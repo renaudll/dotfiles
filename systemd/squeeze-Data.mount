@@ -1,0 +1,15 @@
+[Unit]
+Description=Squeeze Data Share
+Requires=systemd-networkd.service
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=squeeze.squeeze.lan:/Data
+Where=/squeeze/Data
+Options=x-systemd.automount
+Type=nfs
+TimeoutSec=30
+
+[Install]
+WantedBy=multi-user.target

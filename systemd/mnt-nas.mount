@@ -1,0 +1,16 @@
+[Unit]
+Description=Mount Share at boot
+Requires=systemd-networkd.service
+After=network-online.target
+Wants=network-online.target
+
+[Mount]
+What=//192.168.1.3/media
+Where=/mnt/nas
+#Options=credentials=/etc/samba_cred,iocharset=utf8,rw,x-systemd.automount
+Options=x-systemd.automount,username=guest,defaults=noperm
+Type=cifs
+TimeoutSec=30
+
+[Install]
+WantedBy=multi-user.target
