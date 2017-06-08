@@ -34,3 +34,6 @@
 [submodule "vim/bundle/YouCompleteMe"]
 	path = vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe
+[submodule "arch-ppa"]
+	path = arch-ppa
+	url = ssh://sigmao.ddns.net:1337/srv/git/arch-ppa.git

@@ -35,10 +35,10 @@ export PYTHONPATH="${PYTHONPATH}:~/dev/python"
 # Arch-Linux specific
 #
 if [ -f "/etc/arch-release" ]; then
-  alias _install="pacaur -Sy"
+  alias _install="sudo pacman -Sy"
   alias _uninstall="sudo pacman -R"
   alias _update="sudo pacman -Syu"
-  alias _search="sudo pacaur -Ss"
+  alias _search="sudo pacman -Ss"
   alias _start="sudo systemctl start"
   alias _stop="sudo systemctl stop"
   alias _status="sudo systemctl status"
@@ -46,7 +46,8 @@ if [ -f "/etc/arch-release" ]; then
   alias _reload="sudo systemctl daemon-reload"
   alias _enable="sudo systemctl enable"
   alias _disable="sudo systemctl disable"
-  alias _journal="sudo journalctl -u"
+  alias _journalof="sudo journalctl -u"
+  alias _journal="sudo journalctl -b -f"
   alias _reboot="sudo systemctl reboot -i"
 fi
 

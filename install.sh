@@ -20,7 +20,7 @@ ln -s ~/dotfiles/git/gitignore ~/.gitignore
 # Configure .config (autostart, powerline)
 mkdir -p ~/.config
 ln -s ~/dotfiles/config/autostart ~/.config/autostart
-ln -s ~/dotfiles/config/powerline ~/.config/powerline
+ln -s ~/dotfiles/powerline ~/.config/powerline
 
 # Update git submodules
 # cd ~/dotfiles
