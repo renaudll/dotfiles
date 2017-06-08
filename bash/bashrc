@@ -49,6 +49,8 @@ if [ -f "/etc/arch-release" ]; then
   alias _journalof="sudo journalctl -u"
   alias _journal="sudo journalctl -b -f"
   alias _reboot="sudo systemctl reboot -i"
+  alias _arch_ppa_add="arch-ppa add"
+  alias _arch_ppa_build="arch-ppa build pkg"
 fi
 
 #
@@ -102,6 +104,9 @@ if [ -f "/etc/arch-release" ]; then
   # REZ
   export PATH="${PATH}:~/opt/rez/bin/rez"
   export REZ_CONFIG_FILE="~/opt/rezconfig.py"
+
+  # OMTK SPECIFIC
+  export PYTHONPATH="${PYTHONPATH}:~/dev/python/omtk/python"
 
   # SSTK SPECIFIC
   export SSTK_DISABLE_RAVEN=True
