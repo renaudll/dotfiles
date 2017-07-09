@@ -30,6 +30,9 @@ export PATH="${PATH}:~/dotfiles/arch-ppa"  # todo: check for arch
 # Python Developpement
 #
 export PYTHONPATH="${PYTHONPATH}:~/dev/python"
+export PYTHONPATH="${PYTHONPATH}:~/dev/python/omtk/python"
+export PYTHONPATH="${PYTHONPATH}:/opt/pycharm-professional/helpers/pydev/"
+export PYTHONDONTWRITEBYTECODE=1
 
 #
 # Arch-Linux specific
@@ -38,7 +41,7 @@ if [ -f "/etc/arch-release" ]; then
   alias _install="sudo pacman -Sy"
   alias _uninstall="sudo pacman -R"
   alias _update="sudo pacman -Syu"
-  alias _search="sudo pacman -Ss"
+  alias _search="pacman -Ss"
   alias _start="sudo systemctl start"
   alias _stop="sudo systemctl stop"
   alias _status="sudo systemctl status"
@@ -49,9 +52,15 @@ if [ -f "/etc/arch-release" ]; then
   alias _journalof="sudo journalctl -u"
   alias _journal="sudo journalctl -b -f"
   alias _reboot="sudo systemctl reboot -i"
-  alias _arch_ppa_add="arch-ppa add"
-  alias _arch_ppa_build="arch-ppa build pkg"
+  alias _aur_add="arch-ppa add"
+  alias _aur_build="arch-ppa build custom"
 fi
+
+alias ...="../."
+alias ....="../../."
+alias .....="../../../."
+alias ......="../../../../."
+alias .......="../../../../../."
 
 #
 # Extract script
@@ -106,7 +115,7 @@ if [ -f "/etc/arch-release" ]; then
   export REZ_CONFIG_FILE="~/opt/rezconfig.py"
 
   # OMTK SPECIFIC
-  export PYTHONPATH="${PYTHONPATH}:~/dev/python/omtk/python"
+  export PYTHONPATH="${PYTHONPATH}:$(echo ~)/dev/python/omtk/python"
 
   # SSTK SPECIFIC
   export SSTK_DISABLE_RAVEN=True

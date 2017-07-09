@@ -22,6 +22,9 @@ mkdir -p ~/.config
 ln -s ~/dotfiles/config/autostart ~/.config/autostart
 ln -s ~/dotfiles/powerline ~/.config/powerline
 
+# Configure xbindkeys
+ln -s ~/dotfiles/xbindkeys/xbindkeysrc ~/.xbindkeysrc
+
 # Update git submodules
 # cd ~/dotfiles
 # git submodule update --init

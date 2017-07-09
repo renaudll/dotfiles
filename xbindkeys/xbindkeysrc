@@ -1,0 +1,2 @@
+"sleep .5 && xdotool click 3"
+  Control + b:1
