@@ -3,7 +3,9 @@
 		"term_truecolor": false,
 		"paths": [
 			"~/dotfiles/powerline/segments"
-		]
+		],
+		"log_file": "~/powerlog",
+		"log_level": "DEBUG"
 	},
 	"ext": {
 		"ipython": {

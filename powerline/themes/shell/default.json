@@ -35,7 +35,10 @@
       },
       {
         "function": "powerline_gitstatus.gitstatus",
-        "priority": 40
+        "priority": 40,
+        "args": { 
+            "use_dash_c": false
+        }
       }
     ]
   }
