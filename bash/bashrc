@@ -42,19 +42,32 @@ if [ -f "/etc/arch-release" ]; then
   alias _uninstall="sudo pacman -R"
   alias _update="sudo pacman -Syu"
   alias _search="pacman -Ss"
-  alias _start="sudo systemctl start"
-  alias _stop="sudo systemctl stop"
-  alias _status="sudo systemctl status"
-  alias _restart="sudo systemctl restart"
-  alias _reload="sudo systemctl daemon-reload"
-  alias _enable="sudo systemctl enable"
-  alias _disable="sudo systemctl disable"
-  alias _journalof="sudo journalctl -u"
-  alias _journal="sudo journalctl -b -f"
-  alias _reboot="sudo systemctl reboot -i"
   alias _aur_add="arch-ppa add"
   alias _aur_build="arch-ppa build custom"
 fi
+
+#
+# Ubuntu specific
+#
+alias _install="sudo apt-get install"
+alias _uninstall="sudo apt-get remove"
+alias _sync="sudo apt-cache update"
+alias _search="sudo apt-cache search"
+alias _update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove"
+
+# systemd
+alias _start="sudo systemctl start"
+alias _stop="sudo systemctl stop"
+alias _status="sudo systemctl status"
+alias _restart="sudo systemctl restart"
+alias _reload="sudo systemctl daemon-reload"
+alias _enable="sudo systemctl enable"
+alias _disable="sudo systemctl disable"
+alias _journalof="sudo journalctl -u"
+alias _journal="sudo journalctl -b -f"
+alias _reboot="sudo systemctl reboot -i"
+
+
 
 alias ...="../."
 alias ....="../../."
