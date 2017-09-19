@@ -68,6 +68,11 @@ alias _journal="sudo journalctl -b -f"
 alias _reboot="sudo systemctl reboot -i"
 
 
+#
+# TheFuck
+# https://github.com/nvbn/thefuck
+#
+eval $(thefuck --alias)
 
 alias ...="../."
 alias ....="../../."
