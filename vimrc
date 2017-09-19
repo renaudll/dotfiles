@@ -2,12 +2,6 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" TODO: this may not be in the correct place. It is intended to allow overriding <Leader>.
-" source ~/.vimrc.before if it exists.
-if filereadable(expand("~/.vimrc.before"))
-  source ~/.vimrc.before
-endif
-
 " ================ General Config ====================
 
 set number                      "Line numbers are good
@@ -36,9 +30,9 @@ let mapleader=","
 " =============== Vundle Initialization ===============
 " This loads all the plugins specified in ~/.vim/vundles.vim
 " Use Vundle plugin to manage all other plugins
-" if filereadable(expand("~/.vim/vundles.vim"))
-" "  source ~/.vim/vundles.vim
-" endif
+if filereadable(expand("~/.vim/bundle/Vundle.vim"))
+  source ~/.vim/bundle/Vundle.vim
+endif
 
 " ================ Turn Off Swap Files ==============
 
@@ -114,12 +108,14 @@ set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
 " ================ Custom Settings ========================
-" so ~/.yadr/vim/settings.vim
 
+" Workaround vim messing up indent when pasting code
+" https://stackoverflow.com/questions/9822618/how-to-paste-source-code-to-vim-without-error-format
+" set pastetoggle=<F10>
 
+" Ctrl+N to toogle line number
+nmap <C-N> :set invnumber<CR>
 
-
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -180,9 +176,7 @@ filetype plugin indent on    " required
 
 syntax on
 
-"
-" molokai configuration
-"
+" === molokai configuration ===
 colorscheme molokai
 let g:molokai_original = 1
 " Fix transparency issue
