@@ -49,7 +49,7 @@ fi
 #
 # Ubuntu specific
 #
-alias _install="sudo apt-get install"
+alias _install="sudo apt-get install -y"
 alias _uninstall="sudo apt-get remove"
 alias _sync="sudo apt-cache update"
 alias _search="sudo apt-cache search"
