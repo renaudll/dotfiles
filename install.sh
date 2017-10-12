@@ -38,3 +38,6 @@ ln -s ~/dotfiles/xbindkeys/xbindkeysrc ~/.xbindkeysrc
 # Compile ycmd for usage with python (once)
 # cd ~/dotfiles/vim/bundle/YouCompleteMe
 # ./install.py
+
+# Install i3 configuration files
+ln -s ~/dotfiles/i3 ~/.config/i3

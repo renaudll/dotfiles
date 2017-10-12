@@ -2,10 +2,10 @@
 Description=Mount NAS
 
 [Mount]
-What=//192.168.1.3/media
+What=192.168.1.3:/srv/nfs/nas
 Where=/mnt/nas
-Options=x-systemd.automount,username=guest,defaults=noperm
-Type=cifs
+#Options=x-systemd.automount
+Type=nfs
 
 [Install]
 WantedBy=multi-user.target

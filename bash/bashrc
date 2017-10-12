@@ -54,6 +54,8 @@ alias _uninstall="sudo apt-get remove"
 alias _sync="sudo apt-cache update"
 alias _search="sudo apt-cache search"
 alias _update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove"
+alias _provide="dpkg -S"
+alias _installed="apt list --installed"
 
 # systemd
 alias _start="sudo systemctl start"
@@ -142,3 +144,11 @@ if [ -f "/etc/arch-release" ]; then
   export SQUEEZE_SSTK_NO_SENTRY=True
 fi
 
+#
+# Needed by Debian/Ubuntu packaging tools
+#
+export DEBFULLNAME="Renaud Lessard Larouche"
+export DEBEMAIL="sigmao@gmail.com"
+
+# added by Anaconda2 4.4.0 installer
+export PATH="/home/rll/anaconda2/bin:$PATH"
