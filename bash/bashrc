@@ -1,91 +1,105 @@
 #!/bin/bash
 
-#
-# From default arch .bashrc
-#
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+# --- Private functions
+function _get_computer_id {
+  # Hash the computer mac address to determine a unique id.
+  # Inspired from: https://unix.stackexchange.com/questions/144812/generate-consistent-machine-unique-id
+  echo $(
+    ip a |
+    sed '\|^ *link[^ ]* |!d;s|||;s| .*||' |  # extract mac addresses
+    sha256sum |  # hash the results
+    awk '{print $1}'  # remove trailing dashe introduced by sha256sum
+  )
+}
 
-#
-# Make bash more friendly
-#
+function _does_command_exist {
+  # Test for a given command. Return 1 if the command exist on the system, 0 otherwise.
+  if commands -v $1 > /dev/null 2>&1; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+# --- Configure bash
 shopt -s cdspell  # Correct directory names typo in cd commands
 shopt -s nocaseglob  # Correct case errors in commands
 
-#
-# Gaming, ensure steam use system libraries (not needed anymore?)
-#
-#export STEAM_RUNTIME=0
-
-#
-# Export dotfiles bin directory
-#
+# --- Expose dotfiles binaries
 export PATH="${PATH}:~/dotfiles/bin"
-export PATH="${PATH}:~/dotfiles/arch-ppa"  # todo: check for arch
+if _does_command_exist 'pacman'; then
+  export PATH="${PATH}:~/dotfiles/arch-ppa"
+fi
 
-#
-# Python Developpement
-#
-export PYTHONPATH="${PYTHONPATH}:~/dev/python"
-export PYTHONPATH="${PYTHONPATH}:~/dev/python/omtk/python"
-export PYTHONPATH="${PYTHONPATH}:/opt/pycharm-professional/helpers/pydev/"
+# --- Python Developpement
 export PYTHONDONTWRITEBYTECODE=1
 
-#
-# Arch-Linux specific
-#
-if [ -f "/etc/arch-release" ]; then
+# --- Setup aliases for package management
+if _does_command_exist 'pacman'; then
+  # Used by arch
+  echo "Installing aliases for: pacman"
   alias _install="sudo pacman -Sy"
   alias _uninstall="sudo pacman -R"
   alias _update="sudo pacman -Syu"
   alias _search="pacman -Ss"
   alias _aur_add="arch-ppa add"
   alias _aur_build="arch-ppa build custom"
+elif _does_command_exist 'apt-get'; then
+  # Used by debian/ubuntu
+  echo "Installing aliases for: apt-get"
+  alias _install="sudo apt-get install -y"
+  alias _uninstall="sudo apt-get remove"
+  alias _sync="sudo apt-cache update"
+  alias _search="sudo apt-cache search"
+  alias _update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove"
+  alias _provide="dpkg -S"
+  alias _installed="apt list --installed"
 fi
 
-#
-# Ubuntu specific
-#
-alias _install="sudo apt-get install -y"
-alias _uninstall="sudo apt-get remove"
-alias _sync="sudo apt-cache update"
-alias _search="sudo apt-cache search"
-alias _update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove"
-alias _provide="dpkg -S"
-alias _installed="apt list --installed"
+# --- Setup aliases for init systems
+if _does_command_exist 'systemctl'; then
+  # systemd
+  echo "Installing aliases for: systemd"
+  alias _start="sudo systemctl start"
+  alias _stop="sudo systemctl stop"
+  alias _status="sudo systemctl status"
+  alias _restart="sudo systemctl restart"
+  alias _reload="sudo systemctl daemon-reload"
+  alias _enable="sudo systemctl enable"
+  alias _disable="sudo systemctl disable"
+  alias _journalof="sudo journalctl -u"
+  alias _journal="sudo journalctl -b -f"
+  alias _reboot="sudo systemctl reboot -i"
+elif _does_command_exist 'service'; then
+  # initv
+  echo "Installing aliases for initv"
+  _start() { service $1 start; }
+  _stop() { service $1 stop; }
+  _status() { service $1 status; }
+  _restart() { service $1 restart; }
+  _enable() { chkconfig $1 on; }
+  _disable() { chkconfig $1 off; }
+fi
 
-# systemd
-alias _start="sudo systemctl start"
-alias _stop="sudo systemctl stop"
-alias _status="sudo systemctl status"
-alias _restart="sudo systemctl restart"
-alias _reload="sudo systemctl daemon-reload"
-alias _enable="sudo systemctl enable"
-alias _disable="sudo systemctl disable"
-alias _journalof="sudo journalctl -u"
-alias _journal="sudo journalctl -b -f"
-alias _reboot="sudo systemctl reboot -i"
-
-
-#
-# TheFuck
-# https://github.com/nvbn/thefuck
-#
+# --- Configure TheFuck, see https://github.com/nvbn/thefuck
 eval $(thefuck --alias)
 
+# PS1='[\u@\h \W]\$ '
+
+# --- Configure sane aliases
+alias ls='ls --color=auto'
+alias ll='ls -l'  # this is using our ll alias immediately
+alias igrep='grep -i'
 alias ...="../."
 alias ....="../../."
 alias .....="../../../."
 alias ......="../../../../."
 alias .......="../../../../../."
 
-#
-# Extract script
-#
-# src: https://gist.github.com/Jaxmetalmax/f0ec6d2f86474d8d319b
+# --- Extract script, see https://gist.github.com/Jaxmetalmax/f0ec6d2f86474d8d319b
 extract () {
 if [ -f $1 ] ; then
   case $1 in
@@ -106,49 +120,26 @@ else
 fi
 }
 
-#
-# Powerline Integration
-#
-POWERLINE_CONFIG=$(which powerline-config)
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
-
-#
-# Tmux configuration
-#
-
-# Load tmux by default
-#[[ $TERM != "screen" ]] && exec tmux
-
-#
-# Job specific
-#
-if [ -f "/etc/arch-release" ]; then
-  # MAYA SPECIFIC
-  export MAYA_DISABLE_CIP=1 # Prevent a crash when loading Maya in Arch
-  export MAYA_DISABLE_CER=1
-  #export MAYA_COLOR_MANAGEMENT_POLICY_FILE='~/maya/mayaColorManagerProfile.xml'
-
-  # REZ
-  export PATH="${PATH}:~/opt/rez/bin/rez"
-  export REZ_CONFIG_FILE="~/opt/rezconfig.py"
-
-  # OMTK SPECIFIC
-  export PYTHONPATH="${PYTHONPATH}:$(echo ~)/dev/python/omtk/python"
-
-  # SSTK SPECIFIC
-  export SSTK_DISABLE_RAVEN=True
-  export SSTK_DISABLE_LOGSTASH=True
-  export SQUEEZE_SSTK_NO_SENTRY=True
+# --- Configure powerline
+if _does_command_exist powerline-config; then
+  echo "Detected powerline installation"
+  POWERLINE_INSTALL=$(python -c 'import os; import powerline; print(os.path.dirname(powerline.__file__))')
+  echo "Powerline location: ${POWERLINE_INSTALL}"
+  POWERLINE_CONFIG=$(which powerline-config)
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . "${POWERLINE_INSTALL}/bindings/bash/powerline.sh"
+  #. ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 fi
 
-#
-# Needed by Debian/Ubuntu packaging tools
-#
-export DEBFULLNAME="Renaud Lessard Larouche"
-export DEBEMAIL="sigmao@gmail.com"
-
-# added by Anaconda2 4.4.0 installer
-export PATH="/home/rll/anaconda2/bin:$PATH"
+# --- Load machine specific configuration
+# Load machine-specific configuration
+# Note that we need to use $HOME instead of ~
+# see: https://stackoverflow.com/questions/8409024/desktop-test-txt-no-such-file-or-directory
+COMPUTER_UID=$(_get_computer_id)
+LOCAL_BASHRC_LOCATION="$HOME/dotfiles/bash/bashrc_${COMPUTER_UID}.sh"
+if [ -e "${LOCAL_BASHRC_LOCATION}" ]; then
+  echo "Found machine-specific configuration, loading..."
+  . "${LOCAL_BASHRC_LOCATION}"
+fi

@@ -1,0 +1,24 @@
+#
+# Local modification to environement of Arch-Linux-Macbook-2011
+#
+
+# MAYA SPECIFIC
+export MAYA_DISABLE_CIP=1 # Prevent a crash when loading Maya in Arch
+export MAYA_DISABLE_CER=1
+#export MAYA_COLOR_MANAGEMENT_POLICY_FILE='~/maya/mayaColorManagerProfile.xml'
+
+# REZ
+export PATH="${PATH}:~/opt/rez/bin/rez"
+export REZ_CONFIG_FILE="~/opt/rezconfig.py"
+
+# OMTK SPECIFIC
+export PYTHONPATH="${PYTHONPATH}:$(echo ~)/dev/python/omtk/python"
+
+# SSTK SPECIFIC
+export SSTK_DISABLE_RAVEN=True
+export SSTK_DISABLE_LOGSTASH=True
+export SQUEEZE_SSTK_NO_SENTRY=True
+
+export PYTHONPATH="${PYTHONPATH}:~/dev/python"
+export PYTHONPATH="${PYTHONPATH}:~/dev/python/omtk/python"
+export PYTHONPATH="${PYTHONPATH}:/opt/pycharm-professional/helpers/pydev/"
