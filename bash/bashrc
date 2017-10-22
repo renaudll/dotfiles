@@ -17,10 +17,10 @@ function _get_computer_id {
 
 function _does_command_exist {
   # Test for a given command. Return 1 if the command exist on the system, 0 otherwise.
-  if commands -v $1 > /dev/null 2>&1; then
-    return 1
+  if type $1 > /dev/null 2>&1; then
+    return 0  # 0 = true
   else
-    return 0
+    return 1  # 1 = false
   fi
 }
 

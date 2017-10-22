@@ -9,6 +9,25 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# set color variables
+# optional theme colorscheme
+set $grey                #334455
+set $magenta             #ddbbcc
+set $blue                #557788
+set $cyan                #22ddcc
+set $black               #334455
+set $white               #aacccc
+set $yellow              #dd9933
+set $red                 #aa5566
+set $green               #779988
+
+# theme colors
+set $bg-color            #334455
+set $inactive-bg-color   #334455
+set $text-color          #aacccc
+set $inactive-text-color #557788
+set $urgent-bg-color     #ee3355
+
 # set $default_terminal i3-sensible-terminal
 set $default_terminal tilix
 
@@ -95,11 +114,11 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 Workspace 1
-set $workspace2 Workspace 2
-set $workspace3 Workspace 3
-set $workspace4 Workspace 4
-set $workspace5 Workspace 5
+set $workspace1  Code
+set $workspace2 2: BITWIG
+set $workspace3 3: OBS
+set $workspace4 4: RECORD
+set $workspace5 5: BLENDER
 set $workspace6 Workspace 6
 set $workspace7 Workspace 7
 set $workspace8 Workspace 8
@@ -167,6 +186,23 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        colors {
+                # whole color settings
+                background   $black
+                statusline   $white
+                separator    $grey
+
+                # type             border      backgr.     font
+                focused_workspace  $grey       $white      $black
+                active_workspace   $grey       $white      $black
+                inactive_workspace $grey       $black      $white
+                urgent_workspace   $valencia   $valencia   $black
+        }
+        # i3bar position
+        position top
+        
+        # height of the bar in pixels
+
 }
 
 #
@@ -196,3 +232,11 @@ bindsym $mod+c exec google-chrome-stable
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
+
+# Assign bitwig view
+assign [class="bitwig-studio"] 2
+
+exec --no-startup-id bitwig-studio
+exec --no-startup-id obs
+exec --no-startup-id qjackctl
+exec --no-startup-id chromium-browser
