@@ -41,3 +41,4 @@ ln -s ~/dotfiles/xbindkeys/xbindkeysrc ~/.xbindkeysrc
 
 # Install i3 configuration files
 ln -s ~/dotfiles/i3 ~/.config/i3
+ln -s ~/dotfiles/i3status ~/.config/i3status
