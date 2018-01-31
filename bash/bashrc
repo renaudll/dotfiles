@@ -17,10 +17,12 @@ function _get_computer_id {
 
 function _does_command_exist {
   # Test for a given command. Return 1 if the command exist on the system, 0 otherwise.
-  if commands -v $1 > /dev/null 2>&1; then
-    return 1
-  else
+  type $1 > /dev/null 2>&1
+  if [ $? -eq 0 ]
+  then
     return 0
+  else
+    return 1
   fi
 }
 
@@ -40,7 +42,7 @@ export PYTHONDONTWRITEBYTECODE=1
 # --- Setup aliases for package management
 if _does_command_exist 'pacman'; then
   # Used by arch
-  echo "Installing aliases for: pacman"
+  # echo "Installing aliases for: pacman"
   alias _install="sudo pacman -Sy"
   alias _uninstall="sudo pacman -R"
   alias _update="sudo pacman -Syu"
@@ -49,7 +51,7 @@ if _does_command_exist 'pacman'; then
   alias _aur_build="arch-ppa build custom"
 elif _does_command_exist 'apt-get'; then
   # Used by debian/ubuntu
-  echo "Installing aliases for: apt-get"
+  # echo "Installing aliases for: apt-get"
   alias _install="sudo apt-get install -y"
   alias _uninstall="sudo apt-get remove"
   alias _sync="sudo apt-cache update"
@@ -62,7 +64,7 @@ fi
 # --- Setup aliases for init systems
 if _does_command_exist 'systemctl'; then
   # systemd
-  echo "Installing aliases for: systemd"
+  # echo "Installing aliases for: systemd"
   alias _start="sudo systemctl start"
   alias _stop="sudo systemctl stop"
   alias _status="sudo systemctl status"
@@ -75,13 +77,13 @@ if _does_command_exist 'systemctl'; then
   alias _reboot="sudo systemctl reboot -i"
 elif _does_command_exist 'service'; then
   # initv
-  echo "Installing aliases for initv"
-  _start() { service $1 start; }
-  _stop() { service $1 stop; }
-  _status() { service $1 status; }
-  _restart() { service $1 restart; }
-  _enable() { chkconfig $1 on; }
-  _disable() { chkconfig $1 off; }
+  # echo "Installing aliases for initv"
+  function _start() { service $1 start; }
+  function _stop() { service $1 stop; }
+  function _status() { service $1 status; }
+  function _restart() { service $1 restart; }
+  function _enable() { chkconfig $1 on; }
+  function _disable() { chkconfig $1 off; }
 fi
 
 # --- Configure TheFuck, see https://github.com/nvbn/thefuck
