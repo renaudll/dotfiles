@@ -124,9 +124,9 @@ fi
 
 # --- Configure powerline
 if _does_command_exist powerline-config; then
-  echo "Detected powerline installation"
+  # echo "Detected powerline installation"
   POWERLINE_INSTALL=$(python -c 'import os; import powerline; print(os.path.dirname(powerline.__file__))')
-  echo "Powerline location: ${POWERLINE_INSTALL}"
+  # echo "Powerline location: ${POWERLINE_INSTALL}"
   POWERLINE_CONFIG=$(which powerline-config)
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
@@ -142,6 +142,11 @@ fi
 COMPUTER_UID=$(_get_computer_id)
 LOCAL_BASHRC_LOCATION="$HOME/dotfiles/bash/bashrc_${COMPUTER_UID}.sh"
 if [ -e "${LOCAL_BASHRC_LOCATION}" ]; then
-  echo "Found machine-specific configuration, loading..."
+  # echo "Found machine-specific configuration, loading..."
   . "${LOCAL_BASHRC_LOCATION}"
 fi
+
+alias _maya="LD_LIBRARY_PATH=/usr/autodesk/maya2017/lib:$LD_LIBRARY_PATH /usr/autodesk/maya2017/bin/maya.bin"
+alias _ping="ping 8.8.8.8"
+alias _build_slides="(cd ~/dev/html/bart_scripting_course; ./build_slides.sh)"
+
