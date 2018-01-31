@@ -40,7 +40,7 @@ export PYTHONDONTWRITEBYTECODE=1
 # --- Setup aliases for package management
 if _does_command_exist 'pacman'; then
   # Used by arch
-  echo "Installing aliases for: pacman"
+  # echo "Installing aliases for: pacman"
   alias _install="sudo pacman -Sy"
   alias _uninstall="sudo pacman -R"
   alias _update="sudo pacman -Syu"
@@ -62,7 +62,7 @@ fi
 # --- Setup aliases for init systems
 if _does_command_exist 'systemctl'; then
   # systemd
-  echo "Installing aliases for: systemd"
+  # echo "Installing aliases for: systemd"
   alias _start="sudo systemctl start"
   alias _stop="sudo systemctl stop"
   alias _status="sudo systemctl status"
@@ -75,7 +75,7 @@ if _does_command_exist 'systemctl'; then
   alias _reboot="sudo systemctl reboot -i"
 elif _does_command_exist 'service'; then
   # initv
-  echo "Installing aliases for initv"
+  # echo "Installing aliases for initv"
   _start() { service $1 start; }
   _stop() { service $1 stop; }
   _status() { service $1 status; }
@@ -122,9 +122,9 @@ fi
 
 # --- Configure powerline
 if _does_command_exist powerline-config; then
-  echo "Detected powerline installation"
+  # echo "Detected powerline installation"
   POWERLINE_INSTALL=$(python -c 'import os; import powerline; print(os.path.dirname(powerline.__file__))')
-  echo "Powerline location: ${POWERLINE_INSTALL}"
+  # echo "Powerline location: ${POWERLINE_INSTALL}"
   POWERLINE_CONFIG=$(which powerline-config)
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
@@ -140,6 +140,11 @@ fi
 COMPUTER_UID=$(_get_computer_id)
 LOCAL_BASHRC_LOCATION="$HOME/dotfiles/bash/bashrc_${COMPUTER_UID}.sh"
 if [ -e "${LOCAL_BASHRC_LOCATION}" ]; then
-  echo "Found machine-specific configuration, loading..."
+  # echo "Found machine-specific configuration, loading..."
   . "${LOCAL_BASHRC_LOCATION}"
 fi
+
+alias _maya="LD_LIBRARY_PATH=/usr/autodesk/maya2017/lib:$LD_LIBRARY_PATH /usr/autodesk/maya2017/bin/maya.bin"
+alias _ping="ping 8.8.8.8"
+alias _build_slides="(cd ~/dev/html/bart_scripting_course; ./build_slides.sh)"
+
