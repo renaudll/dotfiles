@@ -15,6 +15,15 @@ function _get_computer_id {
   )
 }
 
+function _change_background {
+  pic_dir="/home/rll/Pictures"
+  echo "Scanning $pic_dir"
+  pic_file=$(find $pic_dir | grep jpg | shuf -n1)
+  echo "Changing background to $pic_file"
+  #gconftool-2 --type string --set /desktop/gnome/background/picture_filename "${pic_file}"  
+  gsettings set org.gnome.desktop.background picture-uri $pic_file
+}
+
 function _does_command_exist {
   # Test for a given command. Return 1 if the command exist on the system, 0 otherwise.
   type $1 > /dev/null 2>&1
@@ -75,6 +84,8 @@ if _does_command_exist 'systemctl'; then
   alias _journalof="sudo journalctl -u"
   alias _journal="sudo journalctl -b -f"
   alias _reboot="sudo systemctl reboot -i"
+  alias _suspend="sudo systemctl suspend -i"
+  alias _hybernate="sudo systemctl hibernate -i"
 elif _does_command_exist 'service'; then
   # initv
   # echo "Installing aliases for initv"
@@ -149,4 +160,9 @@ fi
 alias _maya="LD_LIBRARY_PATH=/usr/autodesk/maya2017/lib:$LD_LIBRARY_PATH /usr/autodesk/maya2017/bin/maya.bin"
 alias _ping="ping 8.8.8.8"
 alias _build_slides="(cd ~/dev/html/bart_scripting_course; ./build_slides.sh)"
+alias _build_html="(cd ~/dev/html/bart_scripting_course; ./build_html.sh)"
+alias _build_all="(cd ~/dev/html/bart_scripting_course; ./build_all.sh)"
 
+export PYTHONPATH="$PYTHONPATH:/home/rll/dev/python/omtk/python"
+export _wine="WINEARCH=win32 WINEPREFIX=~/wine wine"
+export PYTHONPATH="$PYTHONPATH:/snap/pycharm-professional/47/helpers/pydev/"

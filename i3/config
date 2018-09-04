@@ -6,6 +6,9 @@ floating_modifier $mod
 # Use the Super key as default
 set $mod Mod4
 
+# Dont automatically focus when mouse position change
+focus_follows_mouse no
+
 # --- Appearance ---
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -31,14 +34,14 @@ set $urgent-bg-color     #ee3355
 
 # --- Workspace definitions ---
 
-set $workspace1 Main
-set $workspace2 Dev
-set $workspace3 3
-set $workspace4 4
-set $workspace5 5
-set $workspace6 6
-set $workspace7 7
-set $workspace8 8
+set $workspace1 1 Emails
+set $workspace2 2 Chrome
+set $workspace3 3 PyCharm
+set $workspace4 4 Maya
+set $workspace5 5 Git
+set $workspace6 6 Chat
+set $workspace7 7 Soundcloud
+set $workspace8 8 Youtube
 set $workspace9 9
 set $workspace10 10
 
@@ -54,19 +57,19 @@ bindsym $mod+Return exec $default_terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # --- Hotkeys: Navigation ---
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+# bindsym $mod+j focus left
+# bindsym $mod+k focus down
+# bindsym $mod+l focus up
+# bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -200,13 +203,17 @@ bar {
 #
 
 # Set the desired resolution
-exec_always xrandr --output DVI-I-1 --off --output DVI-I-0 --off --output DP-3 --primary --mode 3440x1440 --pos 0x0 --rotate normal --output DP-2 --off --output DP-1 --off --output DP-0 --off
+exec_always --no-startup-id ~/.config/i3/layout_fullhd.sh
+
+# --- X11 configuration ---
+
+setxkbmap -layout us,ca -option grp:alt_shift_toggle
 
 # --- X11 media keys ---
 
 # Audio shortcuts
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%"
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # Sreen brightness controls
@@ -216,17 +223,20 @@ bindsym XF86MonBrightnessDown exec --no-startup-id /home/rll/backlight.sh -2 # d
 # --- Hotkeys ---
 
 # Super+G for chrome
-bindsym $mod+G exec --no-startup-id google-chrome-stable
+bindsym $mod+g exec --no-startup-id chromium-browser
 
 # Super+E for nautilus
-bindsym $mod+N exec --no-startup-id nautilus --new-window
+bindsym $mod+n exec --no-startup-id nautilus --new-window
 
 # Super+S for sublime
-bindsym $mod+S exec --no-startup-id subl3 -n
+bindsym $mod+s exec --no-startup-id subl -n
+
+# Super+K for xkill
+bindsym $mod+k exec --no-startup-id xkill
 
 # --- Startup Applications ---
 
 # Note that application will spawn from right to left
-exec --no-startup-id $default_terminal
-exec --no-startup-id chromium-browser
-exec --no-startup-id subl
+# exec --no-startup-id $default_terminal
+# exec --no-startup-id chromium-browser
+# exec --no-startup-id subl
