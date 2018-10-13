@@ -1,0 +1,17 @@
+#
+# System76 Laptop
+#
+
+_battery_uri=/org/freedesktop/UPower/devices/battery_BAT0
+
+function _battery {
+	# Show battery statistics
+	
+	columns=('state' 'time\ to\ full' 'percentage')
+	
+	# Convert to string joined by "|"
+	columns=$(printf "|%s" "${columns[@]}")
+	columns=${columns:1}
+
+	upower -i "${_battery_uri}" | grep -E "${columns}"
+}

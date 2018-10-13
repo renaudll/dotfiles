@@ -1,12 +1,25 @@
 #!/bin/bash
 
+# Resolve dotfiles singleton location
+# Note: Don't use ~
+# https://stackoverflow.com/questions/8409024/desktop-test-txt-no-such-file-or-directory
+DOTFILES="$HOME/dotfiles"
+
+# --- Load machine specific configuration
+# Load machine-specific configuration
+# Note that we need to use $HOME instead of ~
+COMPUTER_UID=$(_get_computer_id)
+
+# Define the location of localized bash configs
+LOCAL_BASHRC_FILE="$DOTFILES/bash/configs/${COMPUTER_UID}"
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # --- Private functions
 function _get_computer_id {
   # Hash the computer mac address to determine a unique id.
-  # Inspired from: https://unix.stackexchange.com/questions/144812/generate-consistent-machine-unique-id
+  # https://unix.stackexchange.com/questions/144812/generate-consistent-machine-unique-id
   echo $(
     ip a |
     sed '\|^ *link[^ ]* |!d;s|||;s| .*||' |  # extract mac addresses
@@ -146,15 +159,16 @@ if _does_command_exist powerline-config; then
   #. ~/.local/lib/python2.7/site-packages/powerline/bindings/bash/powerline.sh
 fi
 
-# --- Load machine specific configuration
-# Load machine-specific configuration
-# Note that we need to use $HOME instead of ~
-# see: https://stackoverflow.com/questions/8409024/desktop-test-txt-no-such-file-or-directory
-COMPUTER_UID=$(_get_computer_id)
-LOCAL_BASHRC_LOCATION="$HOME/dotfiles/bash/bashrc_${COMPUTER_UID}.sh"
-if [ -e "${LOCAL_BASHRC_LOCATION}" ]; then
-  # echo "Found machine-specific configuration, loading..."
-  . "${LOCAL_BASHRC_LOCATION}"
+#echo "Your machine ID is ${COMPUTER_UID}"
+if [ -e "${LOCAL_BASHRC_FILE}" ]
+  then
+    #echo "Loading: ${LOCAL_BASHRC_FILE}"
+    . "${LOCAL_BASHRC_FILE}"
+  else
+    BASHRC_LOCATION_FILENAME=(${!LOCAL_BASHRC_FILE@})
+    echo "Found no local bash config for this computer."
+    echo "You can create one by running:"
+    echo "vi \$${BASHRC_LOCATION_FILENAME}"
 fi
 
 alias _maya="LD_LIBRARY_PATH=/usr/autodesk/maya2017/lib:$LD_LIBRARY_PATH /usr/autodesk/maya2017/bin/maya.bin"
