@@ -163,18 +163,4 @@ if [ -f "/etc/arch-release" ]; then
   # REZ
   export PATH="${PATH}:/home/rll/opt/rez/bin/rez"
   export REZ_CONFIG_FILE="/home/rll/opt/rezconfig.py"
-
-  # SSTK SPECIFIC
-  export SSTK_DISABLE_RAVEN=True
-  export SSTK_DISABLE_LOGSTASH=True
-  export SQUEEZE_SSTK_NO_SENTRY=True
-
-  # OMTK SPECIFIC
-  export PYTHONPATH="${PYTHONPATH}:/home/rll/packages/libSerialization/9.9.9/"
-  export PYTHONPATH="${PYTHONPATH}:/home/rll/packages/omtk/9.9.9/python"
-  export PYTHONPATH="${PYTHONPATH}:/home/rll/packages/sstk/9.9.9/python"
-  export OMTK_PLUGINS="/home/rll/packages/omtk_squeeze/9.9.9:/home/rll/packages/omtk_cradle/9.9.9"
-  
-  # MACBOOK SPECIFIC
-  xbindkeys
 fi
