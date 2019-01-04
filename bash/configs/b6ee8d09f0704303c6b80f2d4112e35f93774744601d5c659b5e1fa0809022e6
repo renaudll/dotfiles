@@ -2,6 +2,7 @@
 # System76 Laptop
 #
 
+# _battery
 _battery_uri=/org/freedesktop/UPower/devices/battery_BAT0
 
 function _battery {
@@ -14,4 +15,58 @@ function _battery {
 	columns=${columns:1}
 
 	upower -i "${_battery_uri}" | grep -E "${columns}"
+}
+
+
+# _maya
+_maya_install="/usr/autodesk/maya2017"
+
+function _maya {
+	LD_LIBRARY_PATH="${_maya_install}/lib:${LD_LIBRARY_PATH}" "${_maya_install}/bin/maya.bin"
+}
+
+
+export omtk="$HOME/dev/python/omtk"
+
+export PYTHONPATH="$PYTHONPATH:$omtk/python"
+export PYTHONPATH="$PYTHONPATH:$HOME/dev/python/maya-mock/python"
+export PYTHONPATH="$PYTHONPATH:/snap/pycharm-professional/47/helpers/pydev/"
+export _wine="WINEARCH=win32 WINEPREFIX=~/wine wine"
+
+# Pyblish dev
+export PYTHONPATH="$PYTHONPATH:$HOME/dev/python/pyblish-base"
+export PYTHONPATH="$PYTHONPATH:$HOME/dev/python/pyblish-qml"
+export PYTHONPATH="$PYTHONPATH:$HOME/dev/python/pyblish-maya"
+export PYBLISH_QML_PYTHON_EXECUTABLE="/usr/bin/python"
+export PYBLISH_QML_PYQT5="/usr/lib/python2.7/dist-packages"
+
+function _change_bg {
+    pattern="/home/rll/Pictures/Backgrounds"
+    echo "Scanning $pattern"
+    image=$(ls $pattern | shuf -n 1)
+    image=$(find "$pattern" | shuf -n1)
+    echo "Changing background to $image"
+    feh --bg-scale "$image"
+}
+
+# Brightness adjustment 
+
+function _brightness {
+    sudo bash -c "echo $1 > /sys/class/backlight/intel_backlight/brightness"
+}
+
+function _brightness_min { 
+    _brightness 1 
+}
+
+function _brightness_max {
+    _brightness 15000
+}
+
+function _brightness_low {
+    _brightness 5000
+}
+
+function _brightness_mid {
+    _brightness 10000
 }
