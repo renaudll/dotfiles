@@ -1,8 +1,0 @@
-[Unit]
-Description=Automount Squeeze software share
-
-[Automount]
-Where=/squeeze/software
-
-[Install]
-WantedBy=multi-user.target
