@@ -89,7 +89,9 @@ elif _does_command_exist 'wifi-menu'; then
 fi
 
 # --- Configure TheFuck, see https://github.com/nvbn/thefuck
-eval $(thefuck --alias)
+if _does_command_exist thefuck; then
+  eval $(thefuck --alias)
+fi
 
 # --- Configure sane aliases
 alias ls='ls --color=auto'

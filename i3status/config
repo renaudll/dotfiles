@@ -19,8 +19,8 @@ general {
 order += "cpu_usage 0"
 order += "cpu_temperature 0"
 order += "load"
-order += "disk /"
 order += "memory"
+order += "disk /"
 order += "volume master"
 order += "wireless wlp3s0"
 order += "battery 0"
@@ -32,7 +32,7 @@ wireless wlp3s0 {
 }
 
 battery 0 {
-    format = "%status %percentage Remain: %remaining"
+    format = "Battery: %status %percentage Remain: %remaining"
     format_down = ""
     last_full_capacity = true
     integer_battery_capacity = true
@@ -70,14 +70,14 @@ cpu_temperature 0 {
 }
 
 disk "/" {
-    format = " Ram: %avail"
+    format = " Disk: %avail / %total"
     prefix_type	= custom
     low_threshold = 20
     threshold_type = percentage_avail
 }
 
 volume master {
-    format = "  %volume "
+    format = " Volume: %volume "
     format_muted = " Volume: muted"
     device = "default"
     mixer = "Master"
