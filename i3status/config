@@ -20,6 +20,7 @@ order += "cpu_usage 0"
 order += "cpu_temperature 0"
 order += "load"
 order += "disk /"
+order += "memory"
 order += "volume master"
 order += "wireless wlp3s0"
 order += "battery 0"
@@ -31,7 +32,7 @@ wireless wlp3s0 {
 }
 
 battery 0 {
-    format = "%status %percentage %remaining"
+    format = "%status %percentage Remain: %remaining"
     format_down = ""
     last_full_capacity = true
     integer_battery_capacity = true
@@ -57,28 +58,35 @@ tztime local {
 }
 
 load {
-    format = " System Load: %1min"
+    format = "  Load: %1min"
 }
 
 cpu_usage {
-    format = " CPU Usage: %usage"
+    format = "  Cpu: %usage"
 }
 
 cpu_temperature 0 {
-	format = " CPU Temp: %degrees°C"
+    format = "%degrees°C"
 }
 
 disk "/" {
-	format = " Disk Usage: %avail"
-	prefix_type	= custom
-	low_threshold = 20
-	threshold_type = percentage_avail
+    format = " Ram: %avail"
+    prefix_type	= custom
+    low_threshold = 20
+    threshold_type = percentage_avail
 }
 
 volume master {
-    format = " Volume: %volume "
+    format = "  %volume "
     format_muted = " Volume: muted"
     device = "default"
     mixer = "Master"
     mixer_idx = 0
 }
+
+memory {
+   format = "Memory: %used / %total"
+   threshold_degraded = "10%"
+   format_degraded = "MEMORY: %free"
+}
+
