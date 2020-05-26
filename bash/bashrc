@@ -49,6 +49,18 @@ elif _does_command_exist 'apt-get'; then
   alias _update="sudo apt-get update && sudo apt-get upgrade && sudo apt-get autoremove"
   alias _provide="dpkg -S"
   alias _installed="apt list --installed"
+elif _does_command_exist 'yum'; then
+  # Used by redhat/centos/fedora
+  alias _install="sudo yum install -y"
+  alias _uninstall="sudo yum remove -y"
+  alias _sync="sudo update update -y"
+  alias _search="yum search"
+  function _provide() { yum provides "*/${1}"; }
+  alias _installed="yum list installed"
+fi
+
+# Aliases: Snap Management
+if _does_command_exist 'snap'; then
   alias _snap_install="sudo snap install"
   alias _snap_find="snap find"
   alias _snap_update="sudo snap refresh"
