@@ -128,7 +128,5 @@ if [ -e "${LOCAL_BASHRC_FILE}" ]
     echo "vi \$${BASHRC_LOCATION_FILENAME}"
 fi
 
-alias _ping="ping 8.8.8.8"
-#alias _build_slides="(cd ~/dev/html/bart_scripting_course; ./build_slides.sh)"
-#alias _build_html="(cd ~/dev/html/bart_scripting_course; ./build_html.sh)"
-#alias _build_all="(cd ~/dev/html/bart_scripting_course; ./build_all.sh)"
+# Load z for browsing
+source "${DOTFILES}/z/z.sh"
