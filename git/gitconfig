@@ -128,3 +128,5 @@
 [user]
 	email = sigmao@gmail.com
 	name = Renaud Lessard Larouche
+[cola]
+	spellcheck = false

@@ -33,6 +33,9 @@ export PYTHONPATH="$PYTHONPATH:$HOME/dev/python/maya-mock/python"
 export PYTHONPATH="$PYTHONPATH:/snap/pycharm-professional/47/helpers/pydev/"
 export _wine="WINEARCH=win32 WINEPREFIX=~/wine wine"
 
+export MAYA_MODULE_PATH="$MAYA_MODULE_PATH:/home/rll/dev/py/maya-dotfiles"
+export MAYA_MODULE_PATH="$MAYA_MODULE_PATH:/home/rll/dev/py/omtk-compound"
+
 # Pyblish dev
 export PYTHONPATH="$PYTHONPATH:$HOME/dev/python/pyblish-base"
 export PYTHONPATH="$PYTHONPATH:$HOME/dev/python/pyblish-qml"
@@ -70,3 +73,6 @@ function _brightness_low {
 function _brightness_mid {
     _brightness 10000
 }
+
+# Nix setup
+#. /home/rll/.nix-profile/etc/profile.d/nix.sh

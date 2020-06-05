@@ -8,6 +8,7 @@ set $mod Mod4
 
 # Dont automatically focus when mouse position change
 focus_follows_mouse no
+no_focus [window_role="pop-up"]
 
 # --- Appearance ---
 
@@ -34,13 +35,13 @@ set $urgent-bg-color     #ee3355
 
 # --- Workspace definitions ---
 
-set $workspace1 1 Emails
-set $workspace2 2 Chrome
-set $workspace3 3 PyCharm
+set $workspace1 1 Term
+set $workspace2 2 Dev
+set $workspace3 3 Email
 set $workspace4 4 Maya
 set $workspace5 5 Git
 set $workspace6 6 Chat
-set $workspace7 7 Soundcloud
+set $workspace7 7 Music
 set $workspace8 8 Youtube
 set $workspace9 9
 set $workspace10 10
@@ -78,10 +79,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -147,7 +148,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -207,7 +208,7 @@ exec_always --no-startup-id ~/.config/i3/layout_fullhd.sh
 
 # --- X11 configuration ---
 
-setxkbmap -layout us,ca -option grp:alt_shift_toggle
+exec_always --no-startup-id setxkbmap -layout us,ca -option grp:alt_shift_toggle
 
 # --- X11 media keys ---
 
@@ -223,7 +224,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id /home/rll/backlight.sh -2 # d
 # --- Hotkeys ---
 
 # Super+G for chrome
-bindsym $mod+g exec --no-startup-id chromium-browser
+bindsym $mod+g exec --no-startup-id google-chrome
 
 # Super+E for nautilus
 bindsym $mod+n exec --no-startup-id nautilus --new-window
@@ -240,3 +241,26 @@ bindsym $mod+k exec --no-startup-id xkill
 # exec --no-startup-id $default_terminal
 # exec --no-startup-id chromium-browser
 # exec --no-startup-id subl
+
+# KDE config
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
+no_focus [class="plasmashell" window_type="notification"]
+
+# Use KDE logout dialog
+bindsym $mod+Shift+e exec --no-startup-id qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+
+# i3-gaps specific configuration
+# You can also use any non-zero value if you'd like to have a border
+# for_window [class=".*"] border pixel 1
+
+exec --no-startup-id feh --bg-fill ~/Pictures/background.jpg

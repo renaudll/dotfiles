@@ -93,6 +93,8 @@ elif _does_command_exist 'service'; then
   function _disable() { chkconfig $1 off; }
 fi
 
+function _pdfunite() { pdfunite $1*.pdf "$1.pdf"; }
+
 # Aliases: Wiki
 if _does_command_exist 'wicd-curses'; then
   alias _wifi="wicd-curses"
@@ -127,6 +129,9 @@ if _does_command_exist powerline-config; then
   . "${POWERLINE_INSTALL}/bindings/bash/powerline.sh"
 fi
 
+# --- Configure python
+export PYTHONDONTWRITEBYTECODE=1
+
 # Load computer specific bashrc
 #echo "Your machine ID is ${COMPUTER_UID}"
 if [ -e "${LOCAL_BASHRC_FILE}" ]
@@ -142,3 +147,5 @@ fi
 
 # Load z for browsing
 source "${DOTFILES}/z/z.sh"
+export EDITOR=micro
+alias e="$EDITOR"

@@ -2,6 +2,10 @@
 # Macbook-2011 Laptop (Arch Linux) config
 #
 
+if _does_command_exist 'pacman'; then
+  export PATH="${PATH}:~/dotfiles/arch-ppa"
+fi
+
 # MAYA SPECIFIC
 export MAYA_DISABLE_CIP=1 # Prevent a crash when loading Maya in Arch
 export MAYA_DISABLE_CER=1
