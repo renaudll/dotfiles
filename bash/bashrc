@@ -111,11 +111,12 @@ fi
 alias ls='ls --color=auto'
 alias ll='ls -l'  # this is using our ll alias immediately
 alias igrep='grep -i'
-alias ...="../."
-alias ....="../../."
-alias .....="../../../."
-alias ......="../../../../."
-alias .......="../../../../../."
+alias ..="cd .."
+alias ...="cd ../."
+alias ....="cd ../../."
+alias .....="cd ../../../."
+alias ......="cd ../../../../."
+alias .......="cd ../../../../../."
 
 # --- Configure powerline
 if _does_command_exist powerline-config; then
@@ -147,5 +148,12 @@ fi
 
 # Load z for browsing
 source "${DOTFILES}/z/z.sh"
+
+# Set default editor
 export EDITOR=micro
+
+# More alises
 alias e="$EDITOR"
+alias h="history"
+function _find() { find $(pwd) -iname "*${1}*"; }
+alias _du="du -h --max-depth 1 . | sort -h -r"
