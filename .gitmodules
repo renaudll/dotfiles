@@ -37,3 +37,6 @@
 [submodule "arch-ppa"]
 	path = arch-ppa
 	url = ssh://sigmao.ddns.net:1337/srv/git/arch-ppa.git
+[submodule "z"]
+	path = z
+	url = https://github.com/rupa/z
