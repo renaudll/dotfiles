@@ -118,17 +118,15 @@ alias .....="cd ../../../."
 alias ......="cd ../../../../."
 alias .......="cd ../../../../../."
 
-# --- Configure powerline
-if _does_command_exist powerline-config; then
-  # echo "Detected powerline installation"
-  POWERLINE_INSTALL=$(python -c 'import os; import powerline; print(os.path.dirname(powerline.__file__))')
-  # echo "Powerline location: ${POWERLINE_INSTALL}"
-  POWERLINE_CONFIG=$(which powerline-config)
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . "${POWERLINE_INSTALL}/bindings/bash/powerline.sh"
-fi
+# --- Configure bash prompt ---
+function parse_git_dirty {
+  [[ $(git status --porcelain 2> /dev/null) ]] && echo "*"
+}
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ (\1$(parse_git_dirty))/"
+}
+
+export PS1="\u@\h \[\033[32m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 # --- Configure python
 export PYTHONDONTWRITEBYTECODE=1
@@ -147,7 +145,9 @@ if [ -e "${LOCAL_BASHRC_FILE}" ]
 fi
 
 # Load z for browsing
-source "${DOTFILES}/z/z.sh"
+if _does_command_exist z; then
+  source "${DOTFILES}/z/z.sh"
+fi
 
 # Set default editor
 export EDITOR=micro
